@@ -1,0 +1,118 @@
+<span lang="zh-Hant">
+  <div class="character">{{Expression}}</div>
+  
+  <div class="pinyin">{{Reading}}</div>
+  
+  <hr>
+  
+  <div class="content-container">
+    <div class="sentence-container">
+      <div class="sentence">{{Sentence}}</div>
+    </div>
+    
+    {{#Media}}
+    <div class="image-container">
+      {{Media}}
+    </div>
+    {{/Media}}
+  </div>
+  
+  {{#Notes}}
+  <div class="notes">{{Notes}}</div>
+  {{/Notes}}
+  
+  <div class="glossary-container">
+    <div class="glossary-header"">
+      <span>意思</span>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div id="glossary" class="glossary-content collapsed">{{Glossary}}</div>
+  </div>
+  
+  <div class="audio-controls-container">
+    {{#Audio}}
+    <div class="audio-button-container">
+      <div class="audio-button">
+        {{Audio}}
+      </div>
+      <div class="audio-label">字词发音</div>
+    </div>
+    {{/Audio}}
+    
+    {{#SentenceAudio}}
+    <div class="audio-button-container">
+      <div class="audio-button">
+        {{SentenceAudio}}
+      </div>
+      <div class="audio-label">例句发音</div>
+    </div>
+    {{/SentenceAudio}}
+
+    {{#CantoAudio}}
+    <div class="audio-button-container">
+      <div class="audio-button">
+        {{CantoAudio}}
+      </div>
+      <div class="audio-label">粤语发音</div>
+    </div>
+    {{/CantoAudio}}
+  </div>
+  
+  <!-- Lightbox for image -->
+  <div id="lightbox" class="lightbox" onclick="hideLightbox()">
+    <span class="close-button">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+  </div>
+</span>
+
+<script>
+function toggleGlossary() {
+  const glossary = document.getElementById('glossary');
+  const toggleIcon = document.querySelector('.toggle-icon');
+  
+  if (glossary.classList.contains('collapsed')) {
+    glossary.classList.remove('collapsed');
+    toggleIcon.textContent = '▲';
+  } else {
+    glossary.classList.add('collapsed');
+    toggleIcon.textContent = '▼';
+  }
+}
+
+function showLightbox(src) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  lightboxImg.src = src;
+  lightbox.style.display = 'flex';
+}
+
+function hideLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+
+(() => {
+  const image = document.querySelector('.image-container img');
+  if (image) {
+    image.addEventListener('click', function() {
+      showLightbox(this.src);
+    });
+  }
+  // glossary toggle
+  const glossary = document.querySelector('.glossary-container');
+  if (glossary) {
+    glossary.addEventListener('click', toggleGlossary);
+  }
+  
+  // Fix SVG styling in audio buttons
+  document.querySelectorAll('.audio-button svg').forEach(svg => {
+    svg.style.width = '30px';
+    svg.style.height = '30px';
+    
+    const circle = svg.querySelector('circle');
+    if (circle) circle.setAttribute('fill', 'transparent');
+    
+    const path = svg.querySelector('path');
+    if (path) path.setAttribute('fill', 'white');
+  });
+})();
+</script>
