@@ -58,6 +58,19 @@
     {{/CantoAudio}}
   </div>
   
+  <div class="source-footer">
+    {{#Source}}<div class="source-item">{{Source}}</div>{{/Source}}
+    {{#PageTitle}}
+    <div class="source-item">
+      {{#URL}}<a href="{{URL}}" target="_blank">{{PageTitle}}</a>{{/URL}}
+      {{^URL}}{{PageTitle}}{{/URL}}
+    </div>
+    {{/PageTitle}}
+    {{^PageTitle}}
+      {{#URL}}<div class="source-item"><a href="{{URL}}" target="_blank">{{URL}}</a></div>{{/URL}}
+    {{/PageTitle}}
+  </div>
+  
   <!-- Lightbox for image -->
   <div id="lightbox" class="lightbox" onclick="hideLightbox()">
     <span class="close-button">&times;</span>

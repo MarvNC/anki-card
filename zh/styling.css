@@ -251,3 +251,29 @@ hr {
   color: #666;
   font-size: 0.9em;
 }
+
+/* Source footer styling */
+.source-footer {
+  margin-top: 25px;
+  padding-top: 8px;
+  border-top: 1px dotted #ddd;
+  font-size: 0.7em;
+  color: #999;
+  text-align: center;
+}
+
+.source-item {
+  margin-bottom: 2px;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.source-footer a {
+  color: #888;
+  text-decoration: none;
+}
+
+.source-footer a:hover {
+  text-decoration: underline;
+  color: #666;
+}
