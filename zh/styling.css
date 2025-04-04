@@ -20,6 +20,8 @@
   font-size: 3em;
   margin-left: 10px;
   color: #444;
+  display: flex;
+  gap: 0.4em;
 }
 
 /* Pinyin styling */

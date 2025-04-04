@@ -3,8 +3,6 @@
 
   <div class="pinyin">{{Reading}}</div>
 
-  <hr>
-
   <div class="content-container">
     <div class="sentence-container">
       <div class="sentence">{{Sentence}}</div>
@@ -134,9 +132,50 @@
     });
   }
 
+  /**
+   * Get simplified and traditional characters from CCCEDICT.
+   * @returns { { simplified: string, traditional: string } | null}
+   */
+  function getSimpTradFromCCCEDICT() {
+    // <div data-sc-cccedict="headword">【純粹・纯粹】</div>
+    const headword = document.querySelector('[data-sc-cccedict]');
+    if (headword) {
+      const text = headword.textContent;
+      const match = text.match(/【(.+)・(.+)】/);
+      if (match) {
+        const traditional = match[1].trim();
+        const simplified = match[2].trim();
+        return { simplified, traditional };
+      }
+    }
+    return null;
+  }
+
+  function renderSimpTrad() {
+    const cccedict = getSimpTradFromCCCEDICT();
+    if (cccedict) {
+      const { simplified, traditional } = cccedict;
+      const characterDiv = document.querySelector('.character');
+
+      const variants = [
+        { type: 'traditional', text: traditional },
+        { type: 'simplified', text: simplified }
+      ];
+
+      if (Math.random() < 0.5) {
+        variants.reverse();
+      }
+
+      characterDiv.innerHTML = variants
+        .map(v => `<span class="${v.type}">${v.text}</span>`)
+        .join('');
+    }
+  }
+
   (() => {
     setUpLightbox();
     setUpGlossaryToggle();
     setUpAudioButtons();
+    renderSimpTrad();
   })();
 </script>
