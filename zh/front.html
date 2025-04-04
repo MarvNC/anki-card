@@ -1,5 +1,5 @@
 <span lang="zh">
-  <div class="character">{{Expression}}</div>
+  <div class="expression">{{Expression}}</div>
 
   <div style="display: none;">{{Glossary}}</div>
 </span>
@@ -29,7 +29,7 @@
     const cccedict = getSimpTradFromCCCEDICT();
     if (cccedict) {
       const { simplified, traditional } = cccedict;
-      const characterDiv = document.querySelector('.character');
+      const expressionDiv = document.querySelector('.expression');
 
       const variants = [
         { type: 'traditional', text: traditional },
@@ -40,7 +40,7 @@
         variants.reverse();
       }
 
-      characterDiv.innerHTML = variants
+      expressionDiv.innerHTML = variants
         .map(v => `<span class="${v.type}">${v.text}</span>`)
         .join('');
     }
