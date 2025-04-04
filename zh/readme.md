@@ -1,5 +1,7 @@
 # ZH Anki Card
 
+![anki_Preview_2025-04-03_18-22-46](https://github.com/user-attachments/assets/9cea91c8-d7ff-40f9-b39f-031ded31909c)
+
 ## Features
 
 - Dual script support - if you have CC-CEDICT in Yomitan, this script will parse
