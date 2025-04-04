@@ -227,29 +227,63 @@ hr {
   }
 }
 
-/* Additional styling for the glossary */
+/* Remove list numbers and make more compact */
 .glossary-content ol {
-  padding-left: 20px;
+  padding-left: 0;
   margin: 0;
+  list-style: none;
 }
 
-.glossary-content li {
-  margin-bottom: 10px;
+/* More compact vertical spacing */
+.glossary-content ol > li {
+  margin-bottom: 0;
+  padding: 6px 20px;
 }
 
+/* Remove default borders between all items */
 .glossary-content li:not(:last-child) {
-  border-bottom: 1px dashed #eee;
-  padding-bottom: 10px;
+  border-bottom: none;
 }
 
-/* Style the Yomitan glossary better */
-.yomitan-glossary {
-  font-size: 0.95em;
+/* Only add borders between different dictionaries */
+.glossary-content ol > li {
+  border-top: 1px solid #eee;
 }
 
+/* Style for dictionary titles */
 .yomitan-glossary i {
-  color: #666;
-  font-size: 0.9em;
+  display: block;
+  margin-left: -15px;
+  margin-bottom: 0px;
+  color: #888;
+  font-size: 0.8em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-style: normal;
+}
+
+/* Add more spacing between different dictionaries */
+.glossary-content li[data-dictionary] {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* Improve nested lists in dictionary entries */
+.glossary-content li ul {
+  padding-left: 15px;
+  margin: 4px 0;
+  list-style-type: disc;
+}
+
+.glossary-content li ul li {
+  padding: 2px 0;
+  margin: 0;
+  border: none;
+}
+
+/* Additional indentation for content within dictionary entries */
+.glossary-content li div[lang="zh"] {
+  margin-left: 15px;
 }
 
 /* Source footer styling */
