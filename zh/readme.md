@@ -20,12 +20,12 @@
 - Glossary
 - Reading
 - Audio
-- CantoAudio
+- CantoAudio (optional)
 - Sentence
 - SentenceAudio
 - Media
-- Notes
-- Hint
+- Notes (WIP)
+- Hint (WIP)
 - Source
 - PageTitle
 - URL
