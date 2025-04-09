@@ -318,3 +318,84 @@ hr {
   text-decoration: underline;
   color: #666;
 }
+
+/* Night Mode Styling */
+.nightMode .card {
+  color: #ddd;
+}
+
+.nightMode .expression {
+  color: #eee;
+}
+
+.nightMode .expression span:nth-child(2) {
+  color: #aaa;
+}
+
+.nightMode .pinyin {
+  color: #bbb;
+}
+
+.nightMode hr {
+  background: #444;
+}
+
+.nightMode .sentence-container {
+  border-color: #444;
+  background-color: #2d2d2d;
+}
+
+.nightMode .notes {
+  background-color: #2d2d2d;
+  border-left-color: #0066cc;
+}
+
+.nightMode .glossary-container {
+  border-color: #444;
+}
+
+.nightMode .glossary-header {
+  background-color: #383838;
+}
+
+.nightMode .glossary-content ol > li:not(:first-child) {
+  border-top-color: #444;
+}
+
+.nightMode .yomitan-glossary i {
+  color: #aaa;
+}
+
+.nightMode .source-footer {
+  border-top-color: #444;
+  color: #888;
+}
+
+.nightMode .source-footer a {
+  color: #999;
+}
+
+.nightMode .source-footer a:hover {
+  color: #ccc;
+}
+
+.nightMode .audio-label {
+  color: #bbb;
+}
+
+/* Adjust audio button colors for night mode */
+.nightMode .audio-button {
+  background-color: #205880;
+}
+
+.nightMode .audio-button:hover {
+  background-color: #2c7cb9;
+}
+
+.nightMode .audio-button svg circle {
+  fill: #205880;
+}
+
+.nightMode .audio-button:hover svg circle {
+  fill: #2c7cb9;
+}
