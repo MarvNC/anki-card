@@ -62,15 +62,15 @@
 
 <div class="source-footer">
   {{#Source}}<div class="source-item">{{Source}}</div>{{/Source}}
-  {{#PageTitle}}
+  {{#DocumentTitle}}
   <div class="source-item">
-    {{#URL}}<a href="{{URL}}" target="_blank">{{PageTitle}}</a>{{/URL}}
-    {{^URL}}{{PageTitle}}{{/URL}}
+    {{#URL}}<a href="{{URL}}" target="_blank">{{DocumentTitle}}</a>{{/URL}}
+    {{^URL}}{{DocumentTitle}}{{/URL}}
   </div>
-  {{/PageTitle}}
-  {{^PageTitle}}
+  {{/DocumentTitle}}
+  {{^DocumentTitle}}
   {{#URL}}<div class="source-item"><a href="{{URL}}" target="_blank">{{URL}}</a></div>{{/URL}}
-  {{/PageTitle}}
+  {{/DocumentTitle}}
 </div>
 
 <!-- Lightbox for image -->

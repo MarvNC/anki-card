@@ -27,5 +27,5 @@
 - Notes
 - Hint
 - Source
-- PageTitle
+- DocumentTitle
 - URL
