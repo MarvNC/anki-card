@@ -24,8 +24,8 @@
 - Sentence
 - SentenceAudio
 - Media
-- Notes (WIP)
-- Hint (WIP)
+- Notes
+- Hint
 - Source
 - PageTitle
 - URL

@@ -89,6 +89,29 @@ hr {
   transform: scale(1.03);
 }
 
+/* Hint styling */
+.hint-container {
+  padding: 10px;
+  border: 1px solid #eee;
+  border-left: 3px solid #205880;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+
+.hint {
+  font-size: 1.2em;
+  color: #444;
+}
+
+/* Night Mode for hint */
+.nightMode .hint-container {
+  border-color: #444;
+  background-color: #2d2d2d;
+}
+.nightMode .hint {
+  color: #ddd;
+}
+
 /* Notes styling */
 .notes-container {
   margin: 20px 0;
