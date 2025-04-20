@@ -62,7 +62,7 @@ hr {
 
 .sentence-container {
   flex: 1;
-  max-height: 150px;
+  max-height: 200px;
   overflow-y: auto;
   padding: 10px;
   border: 1px solid #eee;
@@ -72,8 +72,20 @@ hr {
 }
 
 .sentence {
-  line-height: 1.6;
-  font-size: 1.4em;
+  line-height: 1.75em;
+  font-size: 1.2em;
+}
+
+/* Sentence hover reading */
+.sentence .ruby-version {
+  display: none;
+}
+
+.sentence:hover .ruby-version {
+  display: inline;
+}
+.sentence:hover .hanzi-version {
+  display: none;
 }
 
 .image-container {
