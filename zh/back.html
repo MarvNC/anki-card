@@ -189,4 +189,16 @@
         .join('');
     }
   })();
+
+  // Highlight expression inside sentence
+  (() => {
+    const expression = `{{Expression}}`;
+    const sentence = document.querySelector('.sentence .hanzi-version');
+    const rubyVersion = document.querySelector('.ruby-version');
+
+    if (expression && sentence && rubyVersion) {
+      const regex = new RegExp(`(${expression})`, 'g');
+      sentence.innerHTML = sentence.innerHTML.replace(regex, '<strong>$1</strong>');
+    }
+  })();
 </script>
