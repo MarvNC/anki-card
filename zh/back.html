@@ -193,12 +193,96 @@
   // Highlight expression inside sentence
   (() => {
     const expression = `{{Expression}}`;
-    const sentence = document.querySelector('.sentence .hanzi-version');
-    const rubyVersion = document.querySelector('.ruby-version');
+    const sentenceHanzi = document.querySelector('.sentence .hanzi-version');
+    const sentenceRuby = document.querySelector('.ruby-version');
 
-    if (expression && sentence && rubyVersion) {
-      const regex = new RegExp(`(${expression})`, 'g');
-      sentence.innerHTML = sentence.innerHTML.replace(regex, '<strong>$1</strong>');
+    // Helper function to get base text from a <ruby> element
+    function getRubyBaseText(rubyElement) {
+      let base = '';
+      if (!rubyElement) return base;
+      for (const node of rubyElement.childNodes) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          base += node.textContent;
+        } else if (node.nodeName.toLowerCase() === 'rt') {
+          break; // Stop when we hit the ruby text tag
+        }
+      }
+      return base.trim();
+    }
+
+    // Highlight in Hanzi version
+    if (expression && sentenceHanzi) {
+      try {
+        // Escape special characters in expression for regex
+        const escapedExpression = expression.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        // Use a capturing group to replace only the expression, keeping surrounding text
+        const regex = new RegExp(`(${escapedExpression})`, 'g');
+        sentenceHanzi.innerHTML = sentenceHanzi.innerHTML.replace(regex, '<strong>$1</strong>');
+      } catch (e) {
+        console.error("Error highlighting Hanzi:", e);
+      }
+    }
+
+    // Highlight in Ruby version
+    if (expression && sentenceRuby) {
+      try {
+        const termSpans = Array.from(sentenceRuby.querySelectorAll('.term')); // Convert NodeList to Array
+        if (termSpans.length > 0) {
+          let plainText = '';
+          const spanInfo = []; // Store { element: Node, html: string, start: number, end: number }
+
+          let currentIndex = 0;
+          termSpans.forEach(span => {
+            const ruby = span.querySelector('ruby');
+            // Use helper to get only the base characters
+            const baseText = getRubyBaseText(ruby || span); // Fallback to span if no ruby tag
+
+            if (baseText.length > 0) {
+              const termLength = baseText.length;
+              // Store original element reference along with other info
+              spanInfo.push({ element: span, html: span.outerHTML, start: currentIndex, end: currentIndex + termLength - 1 });
+              plainText += baseText;
+              currentIndex += termLength;
+            }
+            // Note: Spans without extractable base text are currently ignored in plainText
+            // but their original HTML will be preserved in the reconstruction loop.
+          });
+
+          const startIndex = plainText.indexOf(expression);
+
+          if (startIndex !== -1) {
+            const endIndex = startIndex + expression.length - 1;
+            let newInnerHtml = '';
+            let spanInfoIndex = 0; // To track the current span in spanInfo array
+
+            // Iterate through the original child nodes to preserve structure (whitespace, etc.)
+            Array.from(sentenceRuby.childNodes).forEach(node => {
+              if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('term') && spanInfoIndex < spanInfo.length && node === spanInfo[spanInfoIndex].element) {
+                // This node is one of the .term spans we processed
+                const currentSpanData = spanInfo[spanInfoIndex];
+                // Check if the term's character range overlaps with the expression's range
+                if (currentSpanData.start <= endIndex && currentSpanData.end >= startIndex) {
+                  newInnerHtml += `<strong>${currentSpanData.html}</strong>`;
+                } else {
+                  newInnerHtml += currentSpanData.html;
+                }
+                spanInfoIndex++; // Move to the next processed span
+              } else if (node.nodeType === Node.TEXT_NODE) {
+                // Preserve text nodes (whitespace, etc.)
+                newInnerHtml += node.textContent;
+              } else if (node.nodeType === Node.ELEMENT_NODE) {
+                 // Preserve other potential elements (though unlikely based on example)
+                 newInnerHtml += node.outerHTML;
+              }
+              // Ignore comment nodes, etc.
+            });
+
+            sentenceRuby.innerHTML = newInnerHtml;
+          }
+        }
+      } catch (e) {
+        console.error("Error highlighting Ruby:", e);
+      }
     }
   })();
 </script>
