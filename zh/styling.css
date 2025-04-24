@@ -3,9 +3,9 @@
 
 /* Color Palette Variables */
 :root {
-  --accent-purple-blue: #8371F0;
-  --accent-medium-blue: #7186F0;
-  --accent-light-blue: #71AFF0;
+  --accent-purple-blue: #8371f0;
+  --accent-medium-blue: #7186f0;
+  --accent-light-blue: #71aff0;
 }
 
 /* Base card styling */
@@ -28,13 +28,14 @@
   margin-left: 10px;
   color: #444;
   display: flex;
-  gap: 0.4em;
+  gap: 0em 0.4em;
   align-items: baseline;
+  flex-wrap: wrap;
 }
 
 /* Diminish the 2nd part of the expression */
 .expression span:nth-child(2) {
-  font-size: 0.85em;
+  font-size: 0.8em;
   color: #888;
 }
 
@@ -435,12 +436,12 @@ hr {
 }
 
 .nightMode .glossary-content {
-   background-color: #333439;
+  background-color: #333439;
 }
 
 .nightMode .glossary-content ol > li {
-   /* Ensure text is light */
-   color: #ddd;
+  /* Ensure text is light */
+  color: #ddd;
 }
 
 .nightMode .glossary-content ol > li:not(:first-child) {
