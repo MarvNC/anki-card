@@ -74,15 +74,9 @@
 
 <div class="source-footer">
   {{#Source}}<div class="source-item">{{Source}}</div>{{/Source}}
-  {{#DocumentTitle}}
-  <div class="source-item">
-    {{#URL}}<a href="{{URL}}" target="_blank">{{DocumentTitle}}</a>{{/URL}}
-    {{^URL}}{{DocumentTitle}}{{/URL}}
+  <div id="source-link-container" class="source-item">
+    <!-- Dynamic link will be inserted here by JavaScript -->
   </div>
-  {{/DocumentTitle}}
-  {{^DocumentTitle}}
-  {{#URL}}<div class="source-item"><a href="{{URL}}" target="_blank">{{URL}}</a></div>{{/URL}}
-  {{/DocumentTitle}}
 </div>
 
 <!-- Lightbox for image -->
@@ -339,6 +333,68 @@
       } catch (e) {
         console.error("Error highlighting Ruby:", e);
       }
+    }
+  })();
+
+  // Source Link Processing
+  (() => {
+    const rawUrlData = `{{URL}}`;
+    const rawDocTitle = `{{DocumentTitle}}`;
+    const container = document.getElementById('source-link-container');
+
+    if (!rawUrlData || !container) {
+      container.innerText = rawDocTitle || '';
+      return;
+    }
+
+    let actualUrl = '';
+    let linkText = '';
+
+    // Create a temporary element to parse potential HTML in rawUrlData
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = rawUrlData.trim();
+    const anchor = tempDiv.querySelector('a');
+
+    if (anchor && anchor.href) {
+      // Found an anchor tag, use its href
+      actualUrl = anchor.href;
+    } else if (rawUrlData.trim()) {
+      // No anchor tag found, assume rawUrlData is the URL itself
+      // Basic check: does it contain '://' or start with '/'?
+      // This is a simple heuristic and might need refinement depending on expected URL formats.
+      const potentialUrl = rawUrlData.trim();
+      if (potentialUrl.includes('://') || potentialUrl.startsWith('/')) {
+         actualUrl = potentialUrl;
+      } else {
+         // If it doesn't look like a URL, maybe log an error or handle differently
+         console.warn("Source URL field does not contain a valid anchor or recognizable URL:", potentialUrl);
+         // Optionally, still display it as text? For now, we'll treat it as not a link.
+      }
+    }
+
+    // Determine link text
+    if (rawDocTitle && rawDocTitle.trim()) {
+      linkText = rawDocTitle.trim();
+    } else {
+      // Use the extracted URL as text only if we successfully extracted one
+      linkText = actualUrl ? actualUrl : '';
+    }
+
+    // Create and append the link only if we have a valid URL and text
+    if (actualUrl && linkText) {
+      const linkElement = document.createElement('a');
+      linkElement.href = actualUrl;
+      linkElement.textContent = linkText;
+      linkElement.target = '_blank'; // Open in new tab
+      container.appendChild(linkElement);
+    } else if (!actualUrl && linkText) {
+       // If we have a title but no URL, display the title as plain text?
+       // container.textContent = linkText; // Uncomment to display title text even without a link
+       if (container) container.style.display = 'none'; // Hide if no link can be formed
+    }
+     else {
+       // No URL and no title, or URL extraction failed
+       if (container) container.style.display = 'none';
     }
   })();
 </script>
