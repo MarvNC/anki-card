@@ -135,14 +135,14 @@
     try {
       success = document.execCommand('copy');
       if (success) {
-        alert('Expression copied to clipboard! (Legacy method)');
+        // alert('Expression copied to clipboard! (Legacy method)');
       } else {
          console.error('Legacy copy command failed.');
-         alert('Failed to copy expression using legacy method.');
+        //  alert('Failed to copy expression using legacy method.');
       }
     } catch (err) {
       console.error('Error using legacy copy command: ', err);
-      alert('Error copying expression using legacy method.');
+      // alert('Error copying expression using legacy method.');
     }
 
     document.body.removeChild(textArea);
