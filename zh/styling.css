@@ -156,7 +156,6 @@ hr {
   border: 1px solid #ddd;
   border-radius: 6px;
   overflow: hidden;
-  font-family: "Noto Sans TC", "Noto Sans SC", "Noto Sans", sans-serif;
 }
 
 .glossary-header {
@@ -176,6 +175,7 @@ hr {
   overflow-y: auto;
   padding: 0px 15px;
   transition: max-height 0.3s ease-in-out;
+  font-family: "Noto Sans TC", "Noto Sans SC", "Noto Sans", sans-serif;
 }
 
 /* Hide all definitions except the first one in collapsed mode */
