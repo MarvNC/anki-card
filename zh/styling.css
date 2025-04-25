@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Noto+Sans+SC:wght@100..900&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Color Palette Variables */
 :root {
@@ -10,7 +9,7 @@
 
 /* Base card styling */
 .card {
-  font-family: "Noto Sans SC", "Noto Sans TC", "Noto Sans", sans-serif;
+  font-family: "LXGW WenKai TC", "Noto Sans SC", "Noto Sans TC", "Noto Sans", sans-serif;
   font-size: 22px;
   text-align: left;
   background-color: white;
@@ -157,6 +156,7 @@ hr {
   border: 1px solid #ddd;
   border-radius: 6px;
   overflow: hidden;
+  font-family: "Noto Sans TC", "Noto Sans SC", "Noto Sans", sans-serif;
 }
 
 .glossary-header {
