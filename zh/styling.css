@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Noto+Sans+SC:wght@100..900&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Noto+Sans+SC:wght@100..900&family=Noto+Sans+TC:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 /* Color Palette Variables */
 :root {
@@ -9,7 +11,7 @@
 
 /* Base card styling */
 .card {
-  font-family: "LXGW WenKai TC", "Noto Sans SC", "Noto Sans TC", "Noto Sans", sans-serif;
+  font-family: "Noto Sans", "LXGW WenKai TC", sans-serif;
   font-size: 22px;
   text-align: left;
   background-color: white;
@@ -44,6 +46,12 @@
   font-size: 1.6em;
   color: #666;
   margin-left: 10px;
+  font-family: "LXGW WenKai TC";
+}
+
+/* Ruby reading styling */
+ruby rt {
+  font-family: "LXGW WenKai TC";
 }
 
 /* Divider styling */
@@ -175,7 +183,7 @@ hr {
   overflow-y: auto;
   padding: 0px 15px;
   transition: max-height 0.3s ease-in-out;
-  font-family: "Noto Sans TC", "Noto Sans SC", "Noto Sans", sans-serif;
+  /* font-family: "Noto Sans TC", "Noto Sans SC", "Noto Sans", sans-serif; */
 }
 
 /* Hide all definitions except the first one in collapsed mode */
