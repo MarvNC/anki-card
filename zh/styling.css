@@ -73,16 +73,25 @@ hr {
 
 .sentence-container {
   flex: 3;
-  max-height: 200px;
-  overflow-y: auto;
+  max-height: 200px; /* Keep max-height */
+  /* overflow-y: auto; */ /* Let wrapper handle scroll */
   padding: 10px 15px;
   border: 1px solid #eee;
   border-left: 3px solid var(--accent-purple-blue);
   border-radius: 6px;
   background-color: #f9f9f9;
-  display: flex;
+  display: flex; /* Use flexbox */
   flex-direction: row;
-  align-items: center;
+  align-items: center; /* Vertically align items */
+  justify-content: space-between; /* Push button to the right */
+  gap: 10px; /* Add gap between text and button */
+}
+
+/* New wrapper for sentence text to allow scrolling */
+.sentence-text-wrapper {
+  flex-grow: 1; /* Allow text to take available space */
+  overflow-y: auto; /* Enable scrolling for long sentences */
+  max-height: 180px; /* Adjust based on container padding/button size */
 }
 
 .sentence {
@@ -90,16 +99,35 @@ hr {
   font-size: 1.4em;
 }
 
-/* Sentence hover reading */
-.sentence .ruby-version {
+
+/* ADD VISIBILITY CLASSES */
+.sentence-visible {
+  display: inline; /* Or block/inline-block as appropriate */
+}
+
+.sentence-hidden {
   display: none;
 }
 
-.sentence:hover .ruby-version {
-  display: inline;
+/* NEW TOGGLE BUTTON STYLING */
+.sentence-toggle {
+  flex-shrink: 0; /* Prevent button from shrinking */
+  padding: 5px;
+  font-size: 1.4em !important;
+  margin: 0;
+  font-family: inherit; /* Use card font */
+  background-color: white !important;
+  color: #888;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  align-self: center; /* Align button vertically if container height varies */
 }
-.sentence:hover .hanzi-version {
-  display: none;
+
+.sentence-toggle:hover {
+  background-color: #d0d0d0 !important;
+  border-color: #bbb;
 }
 
 .image-container {
@@ -509,4 +537,15 @@ li[data-dictionary^="CC-CEDICT"] div[data-sc-cccedict="headword"] {
 /* Ensure SVG path remains white in night mode */
 .nightMode .audio-button svg path {
   fill: white;
+}
+
+.nightMode .sentence-toggle {
+  background-color: #555;
+  color: #eee;
+  border-color: #666;
+}
+
+.nightMode .sentence-toggle:hover {
+  background-color: #666;
+  border-color: #777;
 }
