@@ -4,15 +4,38 @@
 
 ## Features
 
-- Dual script support - if you have
+- **Dual Script Display (Front & Back):** If you have
   [CC-CEDICT](https://github.com/MarvNC/cc-cedict-yomitan/) in
-  [Yomitan](https://yomitan.wiki/), this script will parse the dictionary and
-  show both simplified and traditional characters in a random order so you can
-  learn both.
-- Minimal glossary - the script only shows the first dictionary entry so you can
-  reduce visual clutter.
-- Image lightbox - the image will be displayed in a lightbox when clicked,
-  allowing you to see the full image.
+  [Yomitan](https://yomitan.wiki/), the script parses the dictionary and shows
+  both simplified and traditional characters in a random order on both the front
+  and back of the card.
+- **Click-to-Copy Expression (Back):** Click the main expression on the back of
+  the card to copy it to the clipboard.
+- **Pinyin Display (Back):** Shows the Pinyin reading below the expression.
+- **Sentence Display with Ruby/Hanzi Toggle (Back):** Displays the example
+  sentence. If furigana/ruby data (`SentenceReading` field) is provided, a
+  button allows toggling between the Hanzi-only version and the version with
+  ruby characters.
+- **Expression Highlighting in Sentence (Back):** The main expression is
+  automatically highlighted within the example sentence (works for both Hanzi
+  and Ruby versions).
+- **Minimal Glossary (Back):** The glossary section initially shows only the
+  first dictionary entry to reduce clutter. Click the header to expand and view
+  all entries.
+- **Image Lightbox (Back):** Images added to the `Media` field are displayed on
+  the card and open in a full-screen lightbox when clicked.
+- **Dedicated Audio Buttons (Back):** Separate, clearly labeled buttons for
+  playing audio from the `Audio` (Expression), `CantoAudio` (Cantonese), and
+  `SentenceAudio` fields.
+- **Hint Display (Front):** Shows the content of the `Hint` field on the front
+  of the card if provided.
+- **Notes Display (Back):** Displays the content of the `Notes` field in a
+  dedicated section.
+- **Source Linking (Back):** Displays the `Source` field text and automatically
+  creates a clickable link using the `URL` and `DocumentTitle` fields.
+- **Responsive Design:** The card layout adjusts for better viewing on smaller
+  screens.
+- **Night Mode Support:** Automatically adapts styles for Anki's night mode.
 
 ## Fields
 
