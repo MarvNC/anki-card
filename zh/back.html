@@ -1,3 +1,37 @@
+<script>
+  /** 
+   * Glossary order for Yomitan.
+   * This array contains regular expressions that match the names of dictionaries.
+   * @type {Array<RegExp>}
+   */
+  var GLOSSARY_ORDER =
+    [
+      // ZH-EN
+      /^CC-CEDICT.+$/,
+      /^DrEye$/,
+      /^Oxford$/,
+      /^Wenlin ABC$/,
+      /^牛津英汉汉英词典$/,
+      /^譯典通英漢雙向字典$/,
+      /^500idioms$/,
+
+      // ZH-JA
+      /^中日大辞典　第二版$/,
+      /^白水社中国語辞典$/,
+
+      // ZH-ZH
+      /^ZH Wikipedia.+$/,
+      /^康熙字典$/,
+      /^MoEdict$/,
+      /^Wunan$/,
+      /^Xiandai7$/,
+      /^XiandaiGuifan$/,
+      /^漢語大詞典$/,
+      /^兩岸詞典$/,
+      /^辭源$/,
+      /^EDHCC$/,
+    ]
+</script>
 <span lang="zh">
   <div class="expression">{{Expression}}</div>
 
@@ -12,10 +46,10 @@
           </span>
           <span class="ruby-version sentence-hidden">
             {{#SentenceReading}}
-              {{furigana:SentenceReading}}
+            {{furigana:SentenceReading}}
             {{/SentenceReading}}
             {{^SentenceReading}}
-              {{Sentence}}
+            {{Sentence}}
             {{/SentenceReading}}
           </span>
         </div>
@@ -136,7 +170,7 @@
       if (success) {
         // alert('Expression copied to clipboard! (Legacy method)');
       } else {
-         console.error('Legacy copy command failed.');
+        console.error('Legacy copy command failed.');
         //  alert('Failed to copy expression using legacy method.');
       }
     } catch (err) {
@@ -172,9 +206,9 @@
             legacyCopy(expression);
           });
         } else {
-           // Fallback if Clipboard API is not available at all
-           console.log('Clipboard API not available, trying legacy copy method...');
-           legacyCopy(expression);
+          // Fallback if Clipboard API is not available at all
+          console.log('Clipboard API not available, trying legacy copy method...');
+          legacyCopy(expression);
         }
       });
     }
@@ -326,8 +360,8 @@
                 // Preserve text nodes (whitespace, etc.)
                 newInnerHtml += node.textContent;
               } else if (node.nodeType === Node.ELEMENT_NODE) {
-                 // Preserve other potential elements (though unlikely based on example)
-                 newInnerHtml += node.outerHTML;
+                // Preserve other potential elements (though unlikely based on example)
+                newInnerHtml += node.outerHTML;
               }
               // Ignore comment nodes, etc.
             });
@@ -369,11 +403,11 @@
       // This is a simple heuristic and might need refinement depending on expected URL formats.
       const potentialUrl = rawUrlData.trim();
       if (potentialUrl.includes('://') || potentialUrl.startsWith('/')) {
-         actualUrl = potentialUrl;
+        actualUrl = potentialUrl;
       } else {
-         // If it doesn't look like a URL, maybe log an error or handle differently
-         console.warn("Source URL field does not contain a valid anchor or recognizable URL:", potentialUrl);
-         // Optionally, still display it as text? For now, we'll treat it as not a link.
+        // If it doesn't look like a URL, maybe log an error or handle differently
+        console.warn("Source URL field does not contain a valid anchor or recognizable URL:", potentialUrl);
+        // Optionally, still display it as text? For now, we'll treat it as not a link.
       }
     }
 
@@ -393,13 +427,13 @@
       linkElement.target = '_blank'; // Open in new tab
       container.appendChild(linkElement);
     } else if (!actualUrl && linkText) {
-       // If we have a title but no URL, display the title as plain text?
-       // container.textContent = linkText; // Uncomment to display title text even without a link
-       if (container) container.style.display = 'none'; // Hide if no link can be formed
+      // If we have a title but no URL, display the title as plain text?
+      // container.textContent = linkText; // Uncomment to display title text even without a link
+      if (container) container.style.display = 'none'; // Hide if no link can be formed
     }
-     else {
-       // No URL and no title, or URL extraction failed
-       if (container) container.style.display = 'none';
+    else {
+      // No URL and no title, or URL extraction failed
+      if (container) container.style.display = 'none';
     }
   })();
 
@@ -438,5 +472,50 @@
         }
       });
     }
+  })();
+
+  // Order Glossary
+  (() => {
+    const YomitanGlossaryDiv = document.querySelector('div.yomitan-glossary');
+    if (!YomitanGlossaryDiv) return;
+    const ol = YomitanGlossaryDiv.querySelector('ol');
+    if (!ol) return;
+    const glossaryItems = [...ol.children];
+
+    /**
+     * Get the sort index for a given dictionary list item element.
+     * @param {HTMLElement} dictionaryElement - The LI element representing the dictionary entry.
+     * @returns {number} - The index in the GLOSSARY_ORDER array, or a large number if not found or invalid.
+     */
+    function getSortIndex(dictionaryElement) {
+      if (!dictionaryElement) return GLOSSARY_ORDER.length + 1; // Handle null/undefined elements
+
+      // Put items with bolded dictionary name first
+      if (dictionaryElement.firstElementChild.querySelector('b')) {
+        return -1;
+      }
+
+      const dictionaryName = dictionaryElement.getAttribute('data-dictionary');
+      // Put items without data-dictionary last
+      if (!dictionaryName) return GLOSSARY_ORDER.length;
+      const index = GLOSSARY_ORDER.findIndex(regex => regex.test(dictionaryName));
+      // Items not in the order list go after defined ones but before those without the attribute
+      return index === -1 ? GLOSSARY_ORDER.length : index;
+    }
+
+    // Sort the glossary items
+    glossaryItems.sort((a, b) => {
+      const indexA = getSortIndex(a);
+      const indexB = getSortIndex(b);
+      return indexA - indexB;
+    });
+
+    // Clear the current list
+    ol.innerHTML = '';
+
+    // Append sorted items back to the list
+    glossaryItems.forEach(item => {
+      ol.appendChild(item);
+    });
   })();
 </script>
