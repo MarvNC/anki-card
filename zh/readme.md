@@ -9,9 +9,18 @@
   [Yomitan](https://yomitan.wiki/), the script parses the dictionary and shows
   both simplified and traditional characters in a random order on both the front
   and back of the card.
+- **Reordering of Glossary (Back):** Yomitan glossary entries can be reordered
+  at any time for all cards, so you can choose to have bilingual or monolingual
+  cards and change your mind at any time, or just change your mind on what
+  dictionary is best.
+  - You can customize the order by modifying the `GLOSSARY_ORDER` variable in
+    the back of the card. The array uses Regex to match the dictionary names.
+  - Entries with bolded dictionary names (primary definitions) appear first, so
+    you can decide for a specific card what you want the primary definition to
+    be just by selecting the dictionary name and pressing `Ctrl + B` to bold it
+    in the Anki editor.
 - **Click-to-Copy Expression (Back):** Click the main expression on the back of
   the card to copy it to the clipboard.
-- **Pinyin Display (Back):** Shows the Pinyin reading below the expression.
 - **Sentence Display with Ruby/Hanzi Toggle (Back):** Displays the example
   sentence. If furigana/ruby data (`SentenceReading` field) is provided, a
   button allows toggling between the Hanzi-only version and the version with
@@ -24,17 +33,6 @@
   all entries.
 - **Image Lightbox (Back):** Images added to the `Media` field are displayed on
   the card and open in a full-screen lightbox when clicked.
-- **Dedicated Audio Buttons (Back):** Separate, clearly labeled buttons for
-  playing audio from the `Audio` (Expression), `CantoAudio` (Cantonese), and
-  `SentenceAudio` fields.
-- **Hint Display (Front):** Shows the content of the `Hint` field on the front
-  of the card if provided.
-- **Notes Display (Back):** Displays the content of the `Notes` field in a
-  dedicated section.
-- **Source Linking (Back):** Displays the `Source` field text and automatically
-  creates a clickable link using the `URL` and `DocumentTitle` fields.
-- **Responsive Design:** The card layout adjusts for better viewing on smaller
-  screens.
 - **Night Mode Support:** Automatically adapts styles for Anki's night mode.
 
 ## Fields
