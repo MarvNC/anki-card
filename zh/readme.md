@@ -8,14 +8,14 @@
 - **🈶 Dual Script Display (Front & Back)**  
   Shows both simplified & traditional characters randomly.
 
-<details>
-<summary>More info</summary>
+  <details>
+  <summary>More info</summary>
 
-Requires [CC-CEDICT](https://github.com/MarvNC/cc-cedict-yomitan/) +
-[Yomitan](https://yomitan.wiki/). Dual script display appears on both sides of
-the card using dictionary parsing.
+  Requires [CC-CEDICT](https://github.com/MarvNC/cc-cedict-yomitan/) +
+  [Yomitan](https://yomitan.wiki/). Dual script display appears on both sides of
+  the card using dictionary parsing.
 
-</details>
+  </details>
 
 - **📖 Glossary Reordering**  
   Reorder and customize dictionary entries at will.
