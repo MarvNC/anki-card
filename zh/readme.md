@@ -1,6 +1,6 @@
 # ZH Anki Card
 
-![anki_Preview_2025-04-20_14-21-16](https://github.com/user-attachments/assets/726ecc38-8780-4ae0-a53e-6a48f8b21e73)
+![anki_Preview_2025-04-30_18-47-13](https://github.com/user-attachments/assets/27728e63-63b6-496b-9191-949e0744871b)
 
 ## Features
 
