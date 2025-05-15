@@ -99,6 +99,11 @@ hr {
   font-size: 1.4em;
 }
 
+.sentence br {
+  /* Remove line breaks */
+  display: none;
+}
+
 
 /* ADD VISIBILITY CLASSES */
 .sentence-visible {
