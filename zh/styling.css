@@ -387,7 +387,7 @@ hr {
 
 /* Individual dictionary customizations */
 /* Hide CC-CEDICT headwords */
-li[data-dictionary^="CC-CEDICT"] div[data-sc-cccedict="headword"] {
+div[data-sc-cccedict="headword"] {
   display: none;
 }
 
