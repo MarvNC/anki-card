@@ -33,31 +33,37 @@
     ]
 </script>
 <span lang="zh">
-  <div class="expression">{{Expression}}</div>
+  <a href="plecoapi://x-callback-url/s?q={{Expression}}&x-source=Anki&x-success=anki://" style="text-decoration: none; color: inherit;">
+    <div class="expression">{{Expression}}</div>
+  </a>
 
   <div class="pinyin">{{Reading}}</div>
 
   <div class="content-container">
+    {{#Sentence}}
     <div class="sentence-container">
-      <div class="sentence-text-wrapper">
-        <div class="sentence">
-          <span class="hanzi-version sentence-visible">
-            {{Sentence}}
-          </span>
-          <span class="ruby-version sentence-hidden">
-            {{#SentenceReading}}
-            {{furigana:SentenceReading}}
-            {{/SentenceReading}}
-            {{^SentenceReading}}
-            {{Sentence}}
-            {{/SentenceReading}}
-          </span>
+      <a href="plecoapi://x-callback-url/s?q={{Sentence}}&x-source=Anki&x-success=anki://" style="text-decoration: none; color: inherit;">
+        <div class="sentence-text-wrapper">
+          <div class="sentence">
+            <span class="hanzi-version sentence-visible">
+              {{Sentence}}
+            </span>
+            <span class="ruby-version sentence-hidden">
+              {{#SentenceReading}}
+              {{furigana:SentenceReading}}
+              {{/SentenceReading}}
+              {{^SentenceReading}}
+              {{Sentence}}
+              {{/SentenceReading}}
+            </span>
+          </div>
         </div>
-      </div>
+      </a>
       {{#SentenceReading}}
       <button id="sentence-toggle-button" class="sentence-toggle">字</button>
       {{/SentenceReading}}
     </div>
+    {{/Sentence}}
 
     {{#Media}}
     <div class="image-container">
@@ -150,67 +156,11 @@
     document.getElementById('lightbox').style.display = 'none';
   }
 
-  // Helper function for legacy copy command
-  function legacyCopy(text) {
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-
-    // Avoid scrolling to bottom
-    textArea.style.top = "0";
-    textArea.style.left = "0";
-    textArea.style.position = "fixed";
-
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-
-    let success = false;
-    try {
-      success = document.execCommand('copy');
-      if (success) {
-        // alert('Expression copied to clipboard! (Legacy method)');
-      } else {
-        console.error('Legacy copy command failed.');
-        //  alert('Failed to copy expression using legacy method.');
-      }
-    } catch (err) {
-      console.error('Error using legacy copy command: ', err);
-      // alert('Error copying expression using legacy method.');
-    }
-
-    document.body.removeChild(textArea);
-    return success;
-  }
-
-
   // Set up glossary toggle
   (() => {
     const glossary = document.querySelector('.glossary-container');
     if (glossary) {
       glossary.addEventListener('click', toggleGlossary);
-    }
-  })();
-
-  // Set up click to copy for expression
-  (() => {
-    const expressionDiv = document.querySelector('.expression');
-    if (expressionDiv) {
-      expressionDiv.addEventListener('click', () => {
-        const expression = `{{Expression}}`;
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(expression).then(() => {
-          }).catch(err => {
-            console.error('Clipboard API error: ', err);
-            // Fallback to legacy method if Clipboard API fails
-            console.log('Trying legacy copy method...');
-            legacyCopy(expression);
-          });
-        } else {
-          // Fallback if Clipboard API is not available at all
-          console.log('Clipboard API not available, trying legacy copy method...');
-          legacyCopy(expression);
-        }
-      });
     }
   })();
 
